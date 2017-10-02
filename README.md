@@ -1,12 +1,12 @@
 # project3308
 Group Project: 
 
-Construction Company Website
+	Construction Company Website
 
 
 Team Name: 
 
-Vipe
+	Vipe
 
 
 Members: 
@@ -47,24 +47,24 @@ Risk Mitigation:
 
 Version Control:
 
-Github
+	Github
 
 
 Development Method:
 
-Agile 
+	Agile	
 
 
 Collaboration Tool:
 
-Slack 
+	Slack 
 
 
 Proposed Architecture: 
 
-Front End - HTML/CSS, D3
-Middleware - Flask, NodeJS
-Back End - mySQL
+	Front End - HTML/CSS, D3
+	Middleware - Flask, NodeJS
+	Back End - mySQL
 
 
 
