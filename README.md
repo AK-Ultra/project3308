@@ -1,7 +1,13 @@
 # project3308
-Group Project: Construction Company Website
+Group Project: 
 
-Team Name: Vipe
+Construction Company Website
+
+
+Team Name: 
+
+Vipe
+
 
 Members: 
 
@@ -39,20 +45,26 @@ Risk Mitigation:
 	We will do our best to research the material with which we are unfamiliar. To accomplish this skill gap we will also stay in touch with each other questions and ask question when needed. 
 
 
-Version Control:  Github
+Version Control:
+
+Github
 
 
-Development Method:  Agile 
+Development Method:
+
+Agile 
 
 
-Collaboration Tool:  Slack 
+Collaboration Tool:
+
+Slack 
 
 
 Proposed Architecture: 
 
-Front End:   HTML/CSS; D3
-Middleware:  Flask; NodeJS
-Back End:    mySQL
+Front End - HTML/CSS, D3
+Middleware - Flask, NodeJS
+Back End - mySQL
 
 
 
