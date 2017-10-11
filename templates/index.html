@@ -11,11 +11,11 @@
     }
   </style>
 
-  
+
   <tabs>
    <h2> Contact Us: 303 517 5306 </h2>
     <br>
-   <a href="index.html"> Home </a> 
+   <a href="index.html"> Home </a>
    &nbsp;
    <a href="Services.html"> Services </a>
    &nbsp;
@@ -24,15 +24,15 @@
     <a href="Info.html"> About Us </a>
    &nbsp;
     <a href="Contact.html"> Contact  </a>
-   <br> 
-   <img src="home.jpg" alt="Me" style="width:750px;height:350px;"> 
- </tabs>
-  
-  
+   <br>
+   <img src="{{url_for('static', filename='home.jpg')}}" style="width:750px;height:350px;" />
+  </tabs>
+
+
  <body>
    <p> For Us to contact you please submite your info below and be try to be very detailed about your desired project. (measurement, color, style) and</p>
  </body>
-   
+
   <form action="man.php">
   Name:<br>
   <input type="text" name="firstname" value="Your Name">
@@ -45,7 +45,7 @@
   <br><br>
   <input type="submit" value="Submit">
 </form>
-   
+
     <style>
  	 header{
   	color:#1A5276;
@@ -60,6 +60,6 @@
        color:#000;
       text-align:center;
      }
-    
+
   </style>
 </html>
