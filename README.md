@@ -6,7 +6,7 @@ Group Project:
 
 Team Name: 
 
-	Vipe
+	ViPe
 
 
 Members: 
