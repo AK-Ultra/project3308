@@ -47,6 +47,7 @@ CREATE TABLE `orderinfo` (
   `address` varchar(50) DEFAULT NULL,
   `city` varchar(20) DEFAULT NULL,
   `orderDate` varchar(11) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `completion` varchar(7) DEFAULT NULL,
   `customerID` int(11) DEFAULT NULL,
   PRIMARY KEY (`orderId`),
@@ -54,10 +55,10 @@ CREATE TABLE `orderinfo` (
   CONSTRAINT `orderinfo_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customerinfo` (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into orderinfo (orderID,address,city,orderDate,completion,customerID) values
-(1151423,'10431 Livingston Dr','Northglenn','4/13/2017','Yes',72391),
-(1234123,'11355 Highline Dr','Littleton','8/20/2017','No',72324),
-(5657475,'820 28th st','Boulder','10/20/2017','Ongoing',72384);
+insert into orderinfo (orderID,address,city,orderDate, description,completion,customerID) values
+(1151423,'10431 Livingston Dr','Northglenn','4/13/2017','Side Walk replacement','Yes',72391),
+(1234123,'11355 Highline Dr','Littleton','8/20/2017','cement patio','No',72324),
+(5657475,'820 28th st','Boulder','10/20/2017','driveway replacement','Ongoing',72384);
 
 /*Data for the table `orderinfo` */
 
