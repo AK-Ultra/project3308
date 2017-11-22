@@ -14,6 +14,7 @@ CREATE TABLE customers (
   lastName varchar(20) DEFAULT NULL,
   emailAddress varchar(50) DEFAULT NULL,
   phoneNumber varchar(12) DEFAULT NULL,
+  address varchar(50) DEFAULT NULL,
   city varchar(20) DEFAULT NULL,
   PRIMARY KEY (customerId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -21,10 +22,10 @@ CREATE TABLE customers (
 /*Data for the table customers */
 
 INSERT INTO customers VALUES
-(72391,'Alex','Delgado','alexdel413@gmail.com','720-242-7210','Northglenn'),
-(72324,'Hector','Marin','HectorMar425@gmail.com','303-808-3003','Littleton'),
-(72384,'Allen','Reyes','Allen424@gmail.com','720-242-6126','Boulder'),
-(0,'Test','User','Test@gmail.com','555-555-5555','Boulder');
+(72391,'Alex','Delgado','alexdel413@gmail.com','720-242-7210','11355 livingston dr','Northglenn'),
+(72324,'Hector','Marin','HectorMar425@gmail.com','303-808-3003','1203 love st','Littleton'),
+(72384,'Allen','Reyes','Allen424@gmail.com','720-242-6126','820 28th st','Boulder'),
+(0,'Test','User','Test@gmail.com','555-555-5555','test address','Boulder');
 
 /*Table structure for table orders */
 
@@ -32,8 +33,6 @@ DROP TABLE IF EXISTS orders;
 
 CREATE TABLE orders (
   orderId int(11) NOT NULL AUTO_INCREMENT,
-  address varchar(50) DEFAULT NULL,
-  city varchar(20) DEFAULT NULL,
   orderDate DATE DEFAULT NULL,
   description varchar(500) DEFAULT NULL,
   status varchar(10) DEFAULT NULL,
@@ -46,10 +45,10 @@ CREATE TABLE orders (
 /*Data for the table orders */
 
 INSERT INTO orders VALUES
-(1151423,'10431 Livingston Dr','Northglenn','2017-04-13','Sidewalk Replacement','Complete',72391),
-(1234123,'11355 Highline Dr','Littleton','2017-08-20','Cement Patio','Initial',72324),
-(5657475,'820 28th st','Boulder','2017-10-20','Driveway Replacement','Ongoing',72384),
-(0,'Test Address','Boulder',CURDATE(),'Test Description','Initial',72392);
+(1151423,'2017-04-13','Sidewalk Replacement','Complete',72391),
+(1234123,'2017-08-20','Cement Patio','Initial',72324),
+(5657475,'2017-10-20','Driveway Replacement','Ongoing',72384),
+(0,CURDATE(),'Test Description','Initial',72392);
 
 /*Table structure for table users */
 
