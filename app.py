@@ -1,7 +1,13 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
-
+# mysql = MySQL()
+# # MySQL configurations
+# app.config['MYSQL_DATABASE_USER'] = 'root'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'user'
+# app.config['MYSQL_DATABASE_DB'] = 'websiteDB'
+# app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+# mysql.init_app(app)
 
 @app.route("/")
 def main():
