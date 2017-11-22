@@ -1,13 +1,11 @@
 from flask import Flask, render_template
+import MySQLdb
 app = Flask(__name__)
 
-# mysql = MySQL()
-# # MySQL configurations
-# app.config['MYSQL_DATABASE_USER'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'user'
-# app.config['MYSQL_DATABASE_DB'] = 'websiteDB'
-# app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-# mysql.init_app(app)
+db = MySQLdb.connect(host='localhost',user='root',passwd='539',db='websiteDB')
+cursor = db.cursor()
+cursor.execute('SELECT * FROM orders;')
+orders = cursor.fetchall()
 
 @app.route("/")
 def main():
@@ -23,11 +21,11 @@ def contact():
 
 @app.route("/projects")
 def projects():
-    return render_template('project.html')
+    return render_template('project.html',data=orders)
 
 @app.route("/info")
 def info():
-    return render_template('info.html')
+    return render_template('aboutUs.html')
 
 @app.route('/contact',methods=['POST'])
 def submitContact():
