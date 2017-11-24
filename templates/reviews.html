@@ -56,8 +56,13 @@ function myFunction() {
     }
 }
 </script>
+
 <p>
-    <a>Projects</a>
+        {% for row in data %}
+            {% for element in row%}
+                <a style="color:black">{{ element }}</a>
+            {%endfor%}
+        {%endfor%}
 </p>
 
 <style>
