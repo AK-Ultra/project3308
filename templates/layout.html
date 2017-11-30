@@ -29,11 +29,20 @@
     body{
     height: cover;
     -webkit-background-clip: text;
-  }
+    background: -webkit-linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
+    background: -o-linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
+    background: -moz-linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
+    background: linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
+    }
     p{
     color:#000;
     font-family: 'Didact Gothic';
     font-size: 22px;
+    }
+    #grad {
+    height: 5;
+    background-image: -webkit-gradient(linear, 65% 0%, 65% 100%, color-stop(0%, #ffffff), color-stop(100%, #9f8660));
+    background-image: -webkit-linear-gradient(#ffffff,#9f8660);
     }
 </style>
 <div id="gradBackground"></div>

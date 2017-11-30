@@ -1,75 +1,6 @@
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><link href="index_files/css.css" rel="stylesheet">
-<link href="index_files/css_002.css" rel="stylesheet">
-</head><body bgcolor="Azure">
-<title>
-    Del Concrete
-</title>
-<header>
-    <h1>Del Concrete </h1>
-</header>
-<p>
-    <a>Contact Us: (303)-517-5306</a>
-</p>
-<div id="grad"></div>
-<style>
-  	header{
-  	margin: 0 0 0px 0;
-  	background: -webkit-linear-gradient(#000, #eee);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  	color:#000;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-  	font-family: 'Black Ops One';
-  	font-size: 30px;
-    }
-    body{
-    height: cover;
-    -webkit-background-clip: text;
-    background: -webkit-linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
-    background: -o-linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
-    background: -moz-linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
-    background: linear-gradient(top, rgba(010,0,0,0), rgba(001,0,0,1));
-    }
-    p{
-    color:#000;
-    font-family: 'Didact Gothic';
-    font-size: 22px;
-    }
-    #grad {
-    height: 5;
-    background-image: -webkit-gradient(linear, 65% 0%, 65% 100%, color-stop(0%, #ffffff), color-stop(100%, #9f8660));
-    background-image: -webkit-linear-gradient(#ffffff,#9f8660);
-    }
-</style>
-<div id="gradBackground"></div>
-<div class="topnav" id="myTopnav">
-    <a href="/">Home</a>
-    <a href="services">Services</a>
-    <a href="projects">Projects</a>
-    <a href="info">Info</a>
-    <a href="contact">Contact</a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-</div>
-<br>
-<img src="home.jpg" alt="Photo">
-<img align="middle">
-<!--<img src="index_files/url_forstatic%2520filename home.jpg%27%29%257D%257D" style="width:750px;height:350px;">-->
+{% extends "layout.html" %}
 
-
-
-<script>
-function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
-</script>
+{% block content %}
 
 <p> For Us to contact you please submit your info below and be try to be
  very detailed about your desired project. (measurement, color, style)
@@ -146,3 +77,5 @@ body {margin:0;}
         }
   </style>
 </body></html>
+
+{% endblock %}
