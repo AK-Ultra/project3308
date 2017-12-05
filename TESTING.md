@@ -1,6 +1,9 @@
 ﻿Who: Elena Ingraham Allen Keef Oscar Delgado Vincent Viano Tanner Quigley
+ 
 Title: Milestone 5: Del Concrete
+
 Vision: The purpose of this project is to help modernize an industry that is extremely important yet often overlooked. 
+
 User Acceptance Tests: A feature that is being implemented in our project is a admin login system to the restricted database pages. These pages contain the admins ability to query the current job information , and past invoices. Naturally we want this info secured so a  random website visitor can’t access the personal info of others. To do this we have python code in are main flask file app.py that will retrieve what is entered in the admin and password containers implemented in the login page. 
         In order to test the login function for security we will be taking a more static testing approach. There are a series of cases we want it to be able to handle, the most important is that when a valid admin enters their credentials they can access the pages. This is the most basic test where we add valid info and check that it logins admin and redirects to the project page. The next test case is where we have entered incorrect info either a valid admin but wrong password or vice versa. We want to make sure that when the admin or password variables are passed to flask from html and when flask sends and receives the queries info from sql, that the comparison of strings works properly in the python code and only allows login when both are correct. The last test is when a random string or no information is entered, we just want to verify that access is still denied and python is handing everything correctly.
 
