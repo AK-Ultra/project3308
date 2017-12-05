@@ -2,23 +2,17 @@
 
 {% block content %}
 
-<p> For Us to contact you please submit your info below and be try to be
- very detailed about your desired project. (measurement, color, style)
-and</p>
-
-
-<form action="man.php">
-    Name:<br>
-    <input name="firstname" value="Your Name" type="text">
-    <br>
-    Email:<br>
-    <input name="lastname" value="Your Email" type="text">
-    <br>
-    Message:<br>
-    <input name="Message" value="What is your desired Project" type="text">
-    <br><br>
-    <input value="Submit" type="submit">
-</form>
+<p>
+    <table border="1" cellpadding="5" cellspacing="5">
+        {% for row in data %}
+        <tr>
+            {% for element in row%}
+                <td style="color:black">{{ element }}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+</p>
 
 <style>
 body {margin:0;}
@@ -29,6 +23,9 @@ body {margin:0;}
      body{
        color:#FFFFF0;
        text-align:center;
+     }
+     p{
+      font-size: 25px;
      }
      .topnav {
         background-color: #333;

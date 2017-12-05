@@ -66,3 +66,22 @@ CREATE TABLE users (
 
 INSERT INTO users VALUES
 (0,'Admin','Admin Username','Encrypted Password');
+
+/*Table structure for table reviews */
+
+DROP TABLE IF EXISTS reviews;
+
+CREATE TABLE reviews (
+  reviewId int(11) NOT NULL AUTO_INCREMENT,
+  orderId int(11) DEFAULT NULL,
+  description varchar(140) DEFAULT NULL,
+  starCount int(1) DEFAULT NULL,
+  PRIMARY KEY (reviewId),
+  KEY orderId (orderId),
+  CONSTRAINT reviews_ibfk_1 FOREIGN KEY (orderId) REFERENCES orders (orderId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table orders */
+
+INSERT INTO reviews VALUES
+(0,1151423,'Nice website, keep up the good work!',5);

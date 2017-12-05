@@ -37,7 +37,7 @@
     }
 </style>
 <div class="topnav" id="myTopnav">
-    <a href="index.html">Home</a>
+    <a href="/">Home</a>
     <a href="services">Services</a>
     <a href="projects">Projects</a>
     <a href="info">Info</a>
@@ -56,8 +56,13 @@ function myFunction() {
     }
 }
 </script>
+
 <p>
-    <a>Services</a>
+        {% for row in data %}
+            {% for element in row%}
+                <a style="color:black">{{ element }}</a>
+            {%endfor%}
+        {%endfor%}
 </p>
 
 <style>
