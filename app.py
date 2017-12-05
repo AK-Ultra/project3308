@@ -43,8 +43,12 @@ def info():
 def submitContact():
     _firstname = request.form['firstname']
     _lastname = request.form['lastname']
-    _message = request.form['Message']
+    _message = request.form['Message']    
 
 @app.route("/reviews")
 def reviews():
     return render_template('reviews.html',data=reviewData)
+
+@app.route("/Login")
+def login():
+    return render_template('login.html')
