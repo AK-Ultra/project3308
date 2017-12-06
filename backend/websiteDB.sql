@@ -65,7 +65,7 @@ CREATE TABLE users (
 /*Data for the table users */
 
 INSERT INTO users VALUES
-(0,'Admin','Admin Username','Encrypted Password');
+(0,'Admin','Admin','123');
 
 /*Table structure for table reviews */
 

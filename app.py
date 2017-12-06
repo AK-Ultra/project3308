@@ -59,7 +59,7 @@ def login():
               attempted_username = request.form['username']
               attempted_password = request.form['password']
               cursor = db.cursor()
-              cursor.execute("SELECT count(*) from users WHERE username = 'Admin Username' and password = 'Encrypted Password';")
+              cursor.execute("SELECT count(*) from users WHERE username = 'Admin' and password = '123';")
               auth =cursor.fetchall()[0][0]
               flash(auth)
               cursor.close()
