@@ -31,7 +31,7 @@ def services():
 @app.route("/contact")
 def contact():
     return render_template('contact.html')
-
+#Remove to be password protected. 
 @app.route("/projects")
 def projects():
     return render_template('project.html',data=projectData)
@@ -58,6 +58,11 @@ def login():
          if request.method == "POST":
               attempted_username = request.form['username']
               attempted_password = request.form['password']
+              cursor = db.cursor()
+              cursor.execute('SELECT * FROM orders;')
+              projectData = cursor.fetchall()
+              cursor.close()
+
               flash(attempted_username)
               flash(attempted_password)
               #Basic for debugging  Sql imp here.          
