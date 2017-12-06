@@ -1,24 +1,24 @@
 from flask import Flask, render_template, flash, request, url_for , redirect, session
-# import MySQLdb
+import MySQLdb
 app = Flask(__name__)
  #allows the hardcoded login logic to work before sql
- app.secret_key = 'password'
+app.secret_key = 'password'
  # Command to Run: FLASK_APP=app.py flask run
 
  # Database Connection
- db = MySQLdb.connect(host='localhost',user='root',passwd='539',db='websiteDB')
+db = MySQLdb.connect(host='localhost',user='root',passwd='Chocolate5',db='websiteDB')
 
  # Query orders
- cursor = db.cursor()
- cursor.execute('SELECT * FROM orders;')
- projectData = cursor.fetchall()
- cursor.close()
+cursor = db.cursor()
+cursor.execute('SELECT * FROM orders;')
+projectData = cursor.fetchall()
+cursor.close()
 
  # Query reviews
- cursor = db.cursor()
- cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID;')
- reviewData = cursor.fetchall()
- cursor.close()
+cursor = db.cursor()
+cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID;')
+reviewData = cursor.fetchall()
+cursor.close()
 
 @app.route("/")
 def main():
@@ -59,18 +59,19 @@ def login():
               attempted_username = request.form['username']
               attempted_password = request.form['password']
               cursor = db.cursor()
-              cursor.execute('SELECT * FROM orders;')
-              projectData = cursor.fetchall()
+              cursor.execute("SELECT count(*) from users WHERE username = 'Admin Username' and password = 'Encrypted Password';")
+              auth =cursor.fetchall()[1]
+              flash(auth)
               cursor.close()
 
               flash(attempted_username)
               flash(attempted_password)
               #Basic for debugging  Sql imp here.
-              if attempted_username == "admin" and attempted_password == "password":
+              if auth < 1 :
                  #Then we redirect to projects which will be admin only
                   return redirect(url_for('projects'))
               else:
-                  error = "Invalid Try Again"
+                  error = auth
          return render_template('login.html',error = error)
      except Exception as e:
          flash(e)
