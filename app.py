@@ -6,7 +6,7 @@ app.secret_key = 'password'
  # Command to Run: FLASK_APP=app.py flask run
 
  # Database Connection
-db = MySQLdb.connect(host='localhost',user='root',passwd='Chocolate5',db='websiteDB')
+db = MySQLdb.connect(host='localhost',user='root',passwd='539',db='websiteDB')
 
  # Query orders
 cursor = db.cursor()
@@ -53,21 +53,21 @@ def reviews():
 @app.route('/login/', methods=["GET","POST"])
 def login():
      error = None
-     try:
+     try
             #They have submitted a login
          if request.method == "POST":
               attempted_username = request.form['username']
               attempted_password = request.form['password']
               cursor = db.cursor()
               cursor.execute("SELECT count(*) from users WHERE username = 'Admin Username' and password = 'Encrypted Password';")
-              auth =cursor.fetchall()[1]
+              auth =cursor.fetchall()[0][0]
               flash(auth)
               cursor.close()
 
               flash(attempted_username)
               flash(attempted_password)
               #Basic for debugging  Sql imp here.
-              if auth < 1 :
+              if auth > 0:
                  #Then we redirect to projects which will be admin only
                   return redirect(url_for('projects'))
               else:
