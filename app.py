@@ -6,7 +6,7 @@ app.secret_key = 'password'
 # Command to Run: FLASK_APP=app.py flask run
 
 # Database Connection
-db = MySQLdb.connect(host='localhost',user='root',passwd='Chocolate5',db='websiteDB')
+db = MySQLdb.connect(host='localhost',user='root',passwd='539',db='websiteDB')
 
 # Query orders
 cursor = db.cursor()
