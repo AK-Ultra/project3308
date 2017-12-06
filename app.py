@@ -1,11 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, request, url_for , redirect, session
 import MySQLdb
 app = Flask(__name__)
-
+#allows the hardcoded login logic to work before sql
+app.secret_key = 'password'
 # Command to Run: FLASK_APP=app.py flask run
 
 # Database Connection
-db = MySQLdb.connect(host='localhost',user='root',passwd='539',db='websiteDB')
+db = MySQLdb.connect(host='localhost',user='root',passwd='Chocolate5',db='websiteDB')
 
 # Query orders
 cursor = db.cursor()
@@ -48,7 +49,25 @@ def submitContact():
 @app.route("/reviews")
 def reviews():
     return render_template('reviews.html',data=reviewData)
-
-@app.route("/Login")
+#Under-Construction Login logic
+@app.route('/login/', methods=["GET","POST"])
 def login():
-    return render_template('login.html')
+     error = None
+     try:
+            #They have submitted a login 
+         if request.method == "POST":
+              attempted_username = request.form['username']
+              attempted_password = request.form['password']
+              flash(attempted_username)
+              flash(attempted_password)
+              #Basic for debugging  Sql imp here.          
+              if attempted_username == "admin" and attempted_password == "password":
+                 #Then we redirect to projects which will be admin only 
+                  return redirect(url_for('projects'))
+              else:
+                  error = "Invalid Try Again" 
+         return render_template('login.html',error = error)
+     except Exception as e:
+         flash(e)
+         return render_template('login.html',error = error)
+
