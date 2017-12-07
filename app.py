@@ -6,7 +6,7 @@ app.secret_key = 'password'
  # Command to Run: FLASK_APP=app.py flask run
 
  # Database Connection
-db = MySQLdb.connect(host='localhost',user='root',passwd='Elena',db='websiteDB')
+db = MySQLdb.connect(host='localhost',user='root',passwd='123',db='websiteDB')
 
  # Query orders
 cursor = db.cursor()
@@ -16,7 +16,7 @@ cursor.close()
 
  # Query reviews
 cursor = db.cursor()
-cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID;')
+cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
 reviewData = cursor.fetchall()
 cursor.close()
 
@@ -52,27 +52,28 @@ def reviews():
 #Under-Construction Login logic
 @app.route('/login/', methods=["GET","POST"])
 def login():
-     error = None
-     try:
-            #They have submitted a login
-         if request.method == "POST":
-              attempted_username = request.form['username']
-              attempted_password = request.form['password']
-              cursor = db.cursor()
-              cursor.execute("SELECT count(*) from users WHERE username = 'Admin Username' and password = 'Encrypted Password';")
-              auth =cursor.fetchall()[1]
-              flash(auth)
-              cursor.close()
+  error = ''
+  try:
+    #They have submitted a login
+    if request.method == "POST":
+      attempted_username = request.form['username']
+      attempted_password = request.form['password']
+      cursor = db.cursor()
+      cursor.execute("SELECT count(*) from users WHERE username = '{}' and password = '{}';".format(attempted_username,attempted_password))
+      auth =cursor.fetchall()[0][0]
+      flash(auth)
+      cursor.close()
 
-              flash(attempted_username)
-              flash(attempted_password)
-              #Basic for debugging  Sql imp here.
-              if auth < 1 :
-                 #Then we redirect to projects which will be admin only
-                  return redirect(url_for('projects'))
-              else:
-                  error = auth
-         return render_template('login.html',error = error)
-     except Exception as e:
-         flash(e)
-         return render_template('login.html',error = error)
+      flash(attempted_username)
+      flash(attempted_password)
+      #Basic for debugging  Sql imp here.
+      if auth > 0:
+         #Then we redirect to projects which will be admin only
+          return redirect(url_for('projects'))
+      else:
+          error = 'Invalid Credentials'
+    return render_template('login.html',error = error)
+
+  except Exception as e:
+    flash(e)
+    return render_template('login.html',error = error)
