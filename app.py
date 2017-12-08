@@ -1,24 +1,28 @@
-from flask import Flask, render_template, flash, request, url_for , redirect, session
-import MySQLdb
-app = Flask(__name__)
- #allows the hardcoded login logic to work before sql
-app.secret_key = 'password'
  # Command to Run: FLASK_APP=app.py flask run
+from flask import Flask, render_template, flash, request, url_for , redirect, session
+import pymysql.cursors
+app = Flask(__name__)
 
- # Database Connection
-db = MySQLdb.connect(host='localhost',user='root',passwd='123',db='websiteDB')
+ # allows the hardcoded login logic to work before sql
+app.secret_key = 'password'
 
- # Query orders
-cursor = db.cursor()
-cursor.execute('SELECT * FROM orders;')
-projectData = cursor.fetchall()
-cursor.close()
+## Database Connection
+conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
 
- # Query reviews
-cursor = db.cursor()
-cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
-reviewData = cursor.fetchall()
-cursor.close()
+## Query tables
+with conn.cursor() as cursor:
+
+  # Query orders
+  cursor.execute('SELECT * FROM orders;')
+  projectData = cursor.fetchall()
+
+with conn.cursor() as cursor:
+  
+  # Query reviews
+  cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
+  reviewData = cursor.fetchall()
+
+
 
 @app.route("/")
 def main():
@@ -58,12 +62,13 @@ def login():
     if request.method == "POST":
       attempted_username = request.form['username']
       attempted_password = request.form['password']
-      cursor = db.cursor()
-      cursor.execute("SELECT count(*) from users WHERE username = '{}' and password = '{}';".format(attempted_username,attempted_password))
-      auth =cursor.fetchall()[0][0]
-      flash(auth)
-      cursor.close()
 
+      ## Query users
+      with conn.cursor() as cursor:
+        cursor.execute("SELECT count(*) from users WHERE BINARY username = '{}' and password = '{}';".format(attempted_username,attempted_password))
+        auth = cursor.fetchone()[0]
+
+      flash(auth)
       flash(attempted_username)
       flash(attempted_password)
       #Basic for debugging  Sql imp here.
