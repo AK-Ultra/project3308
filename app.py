@@ -18,6 +18,15 @@ with conn.cursor() as cursor:
 
 with conn.cursor() as cursor:
   
+  #Query Customers Info
+  with conn.cursor() as cursor:
+
+  # Query orders
+  cursor.execute('SELECT * FROM customers;')
+  customerData = cursor.fetchall()
+
+with conn.cursor() as cursor:
+ 
   # Query reviews
   cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
   reviewData = cursor.fetchall()
@@ -39,7 +48,10 @@ def contact():
 @app.route("/projects")
 def projects():
     return render_template('project.html',data=projectData)
-
+@app.route("/customers")
+def customers():
+    return render_template('customers.html',data=customerData)
+ 
 @app.route("/info")
 def info():
     return render_template('aboutUs.html')
