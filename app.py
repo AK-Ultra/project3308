@@ -19,13 +19,10 @@ with conn.cursor() as cursor:
 with conn.cursor() as cursor:
   
   #Query Customers Info
-  with conn.cursor() as cursor:
-
-  # Query orders
-  cursor.execute('SELECT * FROM customers;')
-  customerData = cursor.fetchall()
-
-with conn.cursor() as cursor:
+cursor = db.cursor()
+cursor.execute('SELECT * FROM customers;')
+customerData = cursor.fetchall()
+cursor.close()
  
   # Query reviews
   cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
