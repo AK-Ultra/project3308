@@ -6,29 +6,31 @@ app = Flask(__name__)
  # allows the hardcoded login logic to work before sql
 app.secret_key = 'password'
 
+# Admin Boolean
+admin = False
+
 ## Database Connection
 conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
 
 ## Query tables
 with conn.cursor() as cursor:
 
-  # Query orders
-  cursor.execute('SELECT * FROM orders;')
-  projectData = cursor.fetchall()
+	# Query orders
+	cursor.execute('SELECT * FROM orders;')
+	projectData = cursor.fetchall()
 
 with conn.cursor() as cursor:
-  
-  #Query Customers Info
-cursor = db.cursor()
-cursor.execute('SELECT * FROM customers;')
-customerData = cursor.fetchall()
-cursor.close()
+
+	# Query reviews
+	cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
+	reviewData = cursor.fetchall()
+
+with conn.cursor() as cursor:  
+
+	# Query customers
+	cursor.execute('SELECT * FROM customers;')
+	customerData = cursor.fetchall()
  
-  # Query reviews
-  cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
-  reviewData = cursor.fetchall()
-
-
 
 @app.route("/")
 def main():
@@ -38,32 +40,36 @@ def main():
 def services():
     return render_template('services.html')
 
-@app.route("/contact")
-def contact():
-    return render_template('contact.html')
 #Remove to be password protected. 
 @app.route("/projects")
 def projects():
-    return render_template('project.html',data=projectData)
+    return render_template('admin/project.html',data=projectData)
+
 @app.route("/customers")
 def customers():
-    return render_template('customers.html',data=customerData)
+    return render_template('admin/customers.html',data=customerData)
  
-@app.route("/info")
+@app.route("/about")
 def info():
     return render_template('aboutUs.html')
 
-@app.route('/contact',methods=['POST'])
-def submitContact():
-    _firstname = request.form['firstname']
-    _lastname = request.form['lastname']
-    _message = request.form['Message']
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
 
-@app.route("/reviews")
+# @app.route("/contact/", methods=["POST"])
+# def submitContact():
+#     _firstname = request.form['firstname']
+#     _lastname = request.form['lastname']
+#     _message = request.form['Message']
+
+#     return render_template('contact.html')
+
+@app.route("/review")
 def reviews():
     return render_template('reviews.html',data=reviewData)
-#Under-Construction Login logic
-@app.route('/login/', methods=["GET","POST"])
+
+@app.route("/login/", methods=["GET","POST"])
 def login():
   error = ''
   try:
@@ -82,6 +88,7 @@ def login():
       flash(attempted_password)
       #Basic for debugging  Sql imp here.
       if auth > 0:
+      	  admin = True
          #Then we redirect to projects which will be admin only
           return redirect(url_for('projects'))
       else:
