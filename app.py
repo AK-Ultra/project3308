@@ -34,7 +34,7 @@ with conn.cursor() as cursor:
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+    return render_template('index.html',data=reviewData)
 
 @app.route("/services")
 def services():
@@ -67,7 +67,7 @@ def contact():
 
 @app.route("/review")
 def reviews():
-    return render_template('reviews.html',data=reviewData)
+    return render_template('reviews.html')
 
 @app.route("/login/", methods=["GET","POST"])
 def login():
@@ -89,7 +89,7 @@ def login():
       #Basic for debugging  Sql imp here.
       if auth > 0:
       	  admin = True
-         #Then we redirect to projects which will be admin only
+          # admin redirect
           return redirect(url_for('projects'))
       else:
           error = 'Invalid Credentials'

@@ -3,7 +3,14 @@
 {% block content %}
 
 <p>
-    <table border="1" cellpadding="5" cellspacing="5">
+    <table border="1" cellpadding="5" cellspacing="5" id="projectTable">
+        <tr>
+            <td style="color:black" > Order ID</td>
+            <td style="color:black" > Order Date</td>
+            <td style="color:black" > Description</td>
+            <td style="color:black" > Status</td>
+            <td style="color:black" > Customer ID</td>
+        </tr>
         {% for row in data %}
         <tr>
             {% for element in row%}
