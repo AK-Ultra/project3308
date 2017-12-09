@@ -24,11 +24,12 @@
 
 <form action="man.php">
     Order ID:<br>
-    <input name="orderID" value="Please enter your Order ID" type="text" >
+    <input name="orderID" placeholder="Order ID" type="text" maxlength="7">
 
     <br>
     Review:<br>
-    <input name="Message" value="How was your experience?" type="text" style="height: 150px";>
+    <!-- <input name="Message" value="How was your experience?" type="text" style="height: 150px";> -->
+    <textarea name="Message" placeholder="How was your experience" rows="5" cols="50" wrap="soft" maxlength="140" style="overflow:hidden; resize:none"></textarea>
     <br><br>
     <input value="Submit" type="submit">
 </form>
