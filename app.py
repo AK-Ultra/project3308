@@ -63,6 +63,24 @@ def projects():
 @login_required
 def customers():
     return render_template('admin/customers.html',data=customerData)
+@app.route("/AddCustomerrequest", methods=['POST','GET'])
+def AddCustomerrequest():
+			FirstName=request.form['FirstName']
+			LastName=request.form['LastName']
+			Email=request.form['Email']
+			Phone=request.form['Phone']
+			Home=request.form['Home']
+			City=request.form['City']
+			cur = conn.cursor()
+			query="INSERT INTO customers VALUES (2002,'%s', '%s', '%s', '%s', '%s', '%s');" % (FirstName,LastName,Email,Phone,Home,City)
+			cur.execute(query)
+			conn.commit()
+			return 'Done'
+
+@app.route("/AddCustomer", methods=['POST','GET'])
+def AddCustomer():
+	return render_template('admin/AddCustomer.html')
+
 #----------------------------------------------
 
 @app.route("/about")
