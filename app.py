@@ -1,13 +1,14 @@
  # Command to Run: FLASK_APP=app.py flask run
-from flask import Flask, render_template, flash, request, url_for , redirect, session
+from flask import Flask, render_template, flash, request, url_for , redirect, session 
+#Used for python connector 
 import pymysql.cursors
+#For creating python decorators
+from functools import wraps
+
 app = Flask(__name__)
 
- # allows the hardcoded login logic to work before sql
+# allows the hardcoded login logic to work before sql
 app.secret_key = 'password'
-
-# Admin Boolean
-admin = False
 
 ## Database Connection
 conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
@@ -40,15 +41,30 @@ def main():
 def services():
     return render_template('services.html')
 
-#Remove to be password protected. 
+#Login required decoratior. Verifys user has logged in as admin. Restricts pages. 
+def login_required(f):
+        @wraps(f)
+        def wrap(*args, **kwargs):
+             if 'logged_in' in session :
+                 return f(*args,**kwargs)
+             else:
+                 flash("Log in First")
+                 return redirect(url_for('login'))
+        return wrap
+
+#---------Password Protected pages------------
+#To password protect add the @login_required decorator under the @app.route()
 @app.route("/projects")
+@login_required
 def projects():
     return render_template('admin/project.html',data=projectData)
 
 @app.route("/customers")
+@login_required
 def customers():
     return render_template('admin/customers.html',data=customerData)
- 
+#----------------------------------------------
+
 @app.route("/about")
 def info():
     return render_template('aboutUs.html')
@@ -69,6 +85,14 @@ def contact():
 def reviews():
     return render_template('reviews.html')
 
+#close the logged_in session 
+@app.route("/logout/")
+@login_required
+def logout():
+    session.clear()
+    flash("You have been logged out")
+    return redirect(url_for('main'))
+
 @app.route("/login/", methods=["GET","POST"])
 def login():
   error = ''
@@ -86,11 +110,14 @@ def login():
       flash(auth)
       flash(attempted_username)
       flash(attempted_password)
-      #Basic for debugging  Sql imp here.
+      #if authorized redirect to projects dashboard 
       if auth > 0:
-      	  admin = True
+          session['logged_in'] = True
+          session['username'] = request.form['username']
+      	  
           # admin redirect
           return redirect(url_for('projects'))
+      #Not valid credentials
       else:
           error = 'Invalid Credentials'
     return render_template('login.html',error = error)
