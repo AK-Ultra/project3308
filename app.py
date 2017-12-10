@@ -37,7 +37,7 @@ with conn.cursor() as cursor:
 def main():
     return render_template('index.html',data=reviewData)
 
-@app.route("/services")
+@app.route("/services/")
 def services():
     return render_template('services.html')
 
@@ -54,22 +54,22 @@ def login_required(f):
 
 #---------Password Protected pages------------
 #To password protect add the @login_required decorator under the @app.route()
-@app.route("/projects")
+@app.route("/projects/")
 @login_required
 def projects():
     return render_template('admin/project.html',data=projectData)
 
-@app.route("/customers")
+@app.route("/customers/")
 @login_required
 def customers():
     return render_template('admin/customers.html',data=customerData)
 #----------------------------------------------
 
-@app.route("/about")
+@app.route("/about/")
 def info():
     return render_template('aboutUs.html')
 
-@app.route("/contact")
+@app.route("/contact/")
 def contact():
     return render_template('contact.html')
 
@@ -81,7 +81,7 @@ def contact():
 
 #     return render_template('contact.html')
 
-@app.route("/review")
+@app.route("/review/")
 def reviews():
     return render_template('reviews.html')
 
@@ -107,9 +107,9 @@ def login():
         cursor.execute("SELECT count(*) from users WHERE BINARY username = '{}' and password = '{}';".format(attempted_username,attempted_password))
         auth = cursor.fetchone()[0]
 
-      flash(auth)
-      flash(attempted_username)
-      flash(attempted_password)
+     # flash(auth)
+     # flash(attempted_username)
+     # flash(attempted_password)
       #if authorized redirect to projects dashboard 
       if auth > 0:
           session['logged_in'] = True
@@ -119,9 +119,10 @@ def login():
           return redirect(url_for('projects'))
       #Not valid credentials
       else:
-          error = 'Invalid Credentials'
+          flash("Invalid Credentials")
+         # error = 'Invalid Credentials'
     return render_template('login.html',error = error)
 
   except Exception as e:
-    flash(e)
+    #flash(e)
     return render_template('login.html',error = error)
