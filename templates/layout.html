@@ -5,7 +5,11 @@
 <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/style.css') }}"/>
 </head>
 <body bgcolor="Azure">
-<a id="login_button" href="login">Login</a>
+  <a href="/">
+  <img src="{{url_for('static', filename='logo.jpg')}}" style="width:452px;height:199px;" />
+  </a>
+
+<a id="login_button" href="/login">Login</a>
 <div id="wrapperHeader">
     <div id="header">
         <img src="logo.jpg" alt="Del Concrete" />
@@ -44,7 +48,7 @@ body {margin:0;}
        text-align:center;
      }
      .topnav {
-        background-color: #333;
+        background-color: #F16429;
         overflow: hidden;
         }
         .topnav a {

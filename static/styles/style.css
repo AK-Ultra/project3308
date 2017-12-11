@@ -37,9 +37,8 @@ form            {
   float: right;
   padding-right: 10px;
 }
-//nav bar
 .topnav {
-        background-color: #ffaf4d;
+        background-color: #F16429;
         overflow: hidden;
         }
 .topnav a {
@@ -121,4 +120,3 @@ fieldset, label { margin: 0; padding: 0; }
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
-
