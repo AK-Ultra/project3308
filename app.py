@@ -1,6 +1,6 @@
  # Command to Run: FLASK_APP=app.py flask run
-from flask import Flask, render_template, flash, request, url_for , redirect, session 
-#Used for python connector 
+from flask import Flask, render_template, flash, request, url_for , redirect, session
+#Used for python connector
 import pymysql.cursors
 #For creating python decorators
 from functools import wraps
@@ -26,12 +26,13 @@ with conn.cursor() as cursor:
 	cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
 	reviewData = cursor.fetchall()
 
-with conn.cursor() as cursor:  
+with conn.cursor() as cursor:
 
 	# Query customers
 	cursor.execute('SELECT * FROM customers;')
 	customerData = cursor.fetchall()
- 
+	
+app.static_folder = 'static'
 
 @app.route("/")
 def main():
@@ -41,7 +42,7 @@ def main():
 def services():
     return render_template('services.html')
 
-#Login required decoratior. Verifys user has logged in as admin. Restricts pages. 
+#Login required decoratior. Verifys user has logged in as admin. Restricts pages.
 def login_required(f):
         @wraps(f)
         def wrap(*args, **kwargs):
@@ -103,7 +104,7 @@ def contact():
 def reviews():
     return render_template('reviews.html')
 
-#close the logged_in session 
+#close the logged_in session
 @app.route("/logout/")
 @login_required
 def logout():
@@ -128,11 +129,11 @@ def login():
      # flash(auth)
      # flash(attempted_username)
      # flash(attempted_password)
-      #if authorized redirect to projects dashboard 
+      #if authorized redirect to projects dashboard
       if auth > 0:
           session['logged_in'] = True
           session['username'] = request.form['username']
-      	  
+
           # admin redirect
           return redirect(url_for('projects'))
       #Not valid credentials
