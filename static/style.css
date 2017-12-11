@@ -10,6 +10,12 @@ header{
 
 .topnav {
   background-color: #F16429;
+
+  background: -moz-linear-gradient(top, #ffffff 0%, #f16429 25%, #f16429 75%, #ffffff 99%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#f16429 25%,#f16429 75%,#ffffff 99%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ffffff 0%,#f16429 25%,#f16429 75%,#ffffff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
   overflow: hidden;
 }
 .topnav a {
@@ -52,7 +58,12 @@ header{
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
+
+  background: -moz-linear-gradient(top, #605f64 0%, #f16429 30%, #f16429 70%, #605f64 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #605f64 0%,#f16429 30%,#f16429 70%,#605f64 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #605f64 0%,#f16429 30%,#f16429 70%,#605f64 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#605f64', endColorstr='#605f64',GradientType=0 ); /* IE6-9 */
+
   color: black;
 }
 .topnav.icon {
