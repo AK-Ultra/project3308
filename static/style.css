@@ -95,6 +95,14 @@ img {
   margin: auto;
 }
 
+.homeImgDiv {
+  border-radius: 15px;
+  overflow: hidden;
+  width: 750px;
+  height: 350px;
+  margin: auto;
+}
+
 .login_button {
   color: #F16429;
   position:absolute;
