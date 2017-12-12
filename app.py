@@ -5,6 +5,8 @@ import pymysql.cursors
 #For creating python decorators
 from functools import wraps
 
+#from flask_mail import Mail
+
 app = Flask(__name__)
 
 # allows the hardcoded login logic to work before sql
@@ -80,9 +82,16 @@ def AddCustomerrequest():
 			Phone=request.form['Phone']
 			Home=request.form['Address']
 			City=request.form['City']
+			Description=request.form['Description']
 			cur = conn.cursor()
-			#needs to dynamicly pick Numbers
-			query="INSERT INTO customers VALUES (175413,'%s', '%s', '%s', '%s', '%s', '%s');" % (FirstName,LastName,Email,Phone,Home,City)
+			#customerID auto_increments
+			query="INSERT INTO customers (firstname,lastname,emailAddress,phoneNumber,address,city) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');" % (FirstName,LastName,Email,Phone,Home,City)
+			cur.execute(query)
+			conn.commit()
+			cur.execute('SELECT MAX(customerId) FROM customers;')
+			ID = cur.fetchone()
+			ID=ID[0]
+			query="INSERT INTO orders (orderDate,description,status,customerId) VALUES (CURDATE(),'%s','Initial',%d);" % (Description,ID)
 			cur.execute(query)
 			conn.commit()
 			flash("Customer Added.")
