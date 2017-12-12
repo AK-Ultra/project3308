@@ -73,15 +73,15 @@ def projects():
 		if request.method == "POST":
 
 			## Update table data
-			with conn.cursor() as cursor:
-				cursor.execute('SELECT * FROM orders;')
-				newData = cursor.fetchall()
+			# with conn.cursor() as cursor:
+			# 	cursor.execute('SELECT * FROM orders;')
+			# 	newData = cursor.fetchall()
 
 			print 'yo!'
 			table = request.form['projectTable']
 			print table
 			# attempted_password = request.form['password']
-			return render_template('admin/project.html',data=newData)
+			return redirect(url_for('projects'))
 		
 		# GET Function
 		else:
@@ -146,26 +146,22 @@ def contact():
 @app.route("/review/", methods=["GET","POST"])
 def reviews():
 	try:
-		# Post function
+		# POST Function
 		if request.method == "POST":
-			formRating = request.form['rating']
-			formOrder = request.form['orderID']
-			formMessage = request.form['Message']
-			print 'POSTED!'
-			print formOrder
-			print formMessage
-			print formRating
-
-		# ## Update table data
-		# with conn.cursor() as cursor:
-		#   cursor.execute('SELECT * FROM orders;')
-		#   newData = cursor.fetchall()
-
-		# attempted_password = request.form['password']
-		return render_template('reviews.html')
+				formRating = request.form['rating']
+				formOrder = request.form['orderID']
+				formMessage = request.form['Message']
+				print 'POSTED!'
+				print formOrder
+				print formMessage
+				print formRating
+				return redirect(url_for('reviews'))
+		
+		# GET Function
+		else:
+			return render_template('reviews.html')
 
 	except Exception as e:
-	#flash(e)
 		return render_template('reviews.html')
 
 #close the logged_in session
