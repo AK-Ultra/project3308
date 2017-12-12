@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
+	<!-- If logged in display extended admin nav bar -->
 	{%if session['logged_in']%}
 	<a class="login_button" href="/logout/">Log-out</a>
 	{%else%}
@@ -13,16 +14,18 @@
 	<a href="/">
 		<img class="main_img" src="{{url_for('static', filename='logo.jpg')}}" style="width:452px;height:199px;" />
 	</a>
+	<!--     Main Navbar -->
   <div class="topnav" id="myTopnav">
       <a href="/">Home</a>
       <a href="/services">Services</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
       <a href="/review">Review</a>
+			<!-- If logged in display extended admin nav bar -->
       {% if session['logged_in'] %}
       <a href="/projects">Projects</a>
       <a href="/customers">Customers</a>
-			<a href="/AddCustomer">AddCustomer</a>
+      <a href="/AddCustomer">AddCustomer</a>
       {%endif%}
   </div>
   <br>
@@ -39,6 +42,8 @@ function myFunction() {
 }
 </script>
 </body>
+
+<!--Flask flashing feature implemnted for all who extend layout.html-->
 <div class="container-fluid" style="min-height:100% width:80%">
 {% with messages = get_flashed_messages()%}
 	<!--If messages pending then print each message to screen-->
@@ -52,8 +57,10 @@ function myFunction() {
 		</div>
 		{% endfor %}
 	{%endif%}
-
 {% endwith %}
+
+
+<!--for all bootstrap code that needs it javascript-->
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
