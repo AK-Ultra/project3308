@@ -53,6 +53,12 @@ def login_required(f):
                  return redirect(url_for('login'))
         return wrap
 
+#def loginCheck():
+#    if 'logged_in' in session:
+#        return True
+#    else: 
+#        return False
+
 #---------Password Protected pages------------
 #To password protect add the @login_required decorator under the @app.route()
 @app.route("/projects/")
@@ -60,11 +66,13 @@ def login_required(f):
 def projects():
     return render_template('admin/project.html',data=projectData)
 
-@app.route("/customers/")
+@app.route("/customers/", methods=['POST','GET'])
 @login_required
 def customers():
     return render_template('admin/customers.html',data=customerData)
+
 @app.route("/AddCustomerrequest", methods=['POST','GET'])
+@login_required
 def AddCustomerrequest():
 			FirstName=request.form['FirstName']
 			LastName=request.form['LastName']
@@ -80,7 +88,7 @@ def AddCustomerrequest():
 
 @app.route("/AddCustomer", methods=['POST','GET'])
 def AddCustomer():
-	return render_template('admin/AddCustomer.html')
+    	return render_template('admin/AddCustomer.html')
 
 #----------------------------------------------
 

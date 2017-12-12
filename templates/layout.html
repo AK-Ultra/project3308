@@ -1,33 +1,42 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
-  <a class="login_button" href="/login">Login</a>
-  <a href="/">
-    <img class="main_img" src="{{url_for('static', filename='logo.jpg')}}" style="width:452px;height:199px;" />
-  </a>
+	{%if session['logged_in']%}		       
+	<a class="login_button" href="/logout/">Log-out</a>
+	{%else%}
+       	<a class="login_button" href="/login">Login</a>  
+  	{%endif%}
+	<a href="/">
+		<img class="main_img" src="{{url_for('static', filename='logo.jpg')}}" style="width:452px;height:199px;" />
+	</a>
   <div class="topnav" id="myTopnav">
       <a href="/">Home</a>
       <a href="/services">Services</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
       <a href="/review">Review</a>
+      {% if session['logged_in'] %}
+      <a href="/projects">Projects</a>
+      <a href="/customers">Customers</a>
+      {%endif%}
   </div>
   <br>
   <!--<img src="index_files/url_forstatic%2520filename home.jpg%27%29%257D%257D" style="width:750px;height:350px;">-->
 
-  <script>
-  function myFunction() {
-      var x = document.getElementById("myTopnav");
-      if (x.className === "topnav") {
-          x.className += " responsive";
-      } else {
-          x.className = "topnav";
-      }
-  }
-  </script>
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
 </body>
 <div class="container-fluid" style="min-height:100% width:80%">
 {% with messages = get_flashed_messages()%}

@@ -1,4 +1,4 @@
-{% extends "adminLayout.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
 
@@ -31,6 +31,37 @@
         {%endfor%}
 
     </table>
+
+
+<!--Old Form</p>
+<form action="/AddCustomerrequest" method="POST">
+First name: <input Id="Fname" type="text" name="FirstName" value=""><br>
+Last name: <input Id="Lname" type="text" name="LastName" value=""><br>
+Email Address: <input Id="EAddress" type="text" name="Email" value=""><br>
+Phone Number: <input Id="Pnumber" type="text" name="Phone" value=""><br>
+Home Address:<input Id="HAddress" type="text" name="Home" value=""><br>
+City: <input Id="CCity" type="text" name="City" value=""><br>
+<input type="submit" value="Submit">
+</form>
+ <p>Click the "Submit" button and the form-data will be sent to a page on the server called "/action_page.php".</p>
+-->
+
+<div class="container">
+	<br>
+	<h4><i style="color:black">Add a customer: </i></h4>
+	<br>
+	<form action ="" class= "form-inline"  method ="post"><p>
+	<i style="color:black" > FirstName: </i><input type="text" class="form-control" placeholder = "FirstName" name="FirstName" value = "{{request.form.FirstName}}"><br>
+	<i style="color:Black">LastName: </i><input type="text" class="form-control" placeholder = "LastName" name="LastName" value = "{{request.form.LastName}}"><br>
+	<i style="color:Black">Email: </i><input type="text" class="form-control" placeholder = "Email" name="Email" value = "{{request.form.Email}}"><br>
+	<i style="color:Black">Phone: </i><input type="text" class="form-control" placeholder = "Phone" name="Phone" value = "{{request.form.Phone}}"><br>
+	<i style="color:Black">Address: </i><input type="text" class="form-control" placeholder = "Address" name="Address" value = "{{request.form.Address}}"><br>
+	<i style="color:Black">City: </i><input type="text" class="form-control" placeholder = "City" name="City" value = "{{request.form.City}}"><br>
+	<input class="btn btn-default" type="submit" value="Login"></p>
+	</form>
+</div>
+<p>
+
 
 </p>
 
