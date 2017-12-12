@@ -16,11 +16,7 @@ app.secret_key = 'password'
 conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
 
 ## Query tables
-with conn.cursor() as cursor:
 
-	# Query orders
-	cursor.execute('SELECT * FROM orders;')
-	projectData = cursor.fetchall()
 
 with conn.cursor() as cursor:
 
@@ -67,25 +63,33 @@ def login_required(f):
 @app.route("/projects/", methods=["GET","POST"])
 @login_required
 def projects():
-  try:
-    #They have submitted a login
-    if request.method == "POST":
+	try:
+		with conn.cursor() as cursor:
+			# Query orders
+			cursor.execute('SELECT * FROM orders;')
+			projectData = cursor.fetchall()
 
-      ## Update table data
-      with conn.cursor() as cursor:
-        cursor.execute('SELECT * FROM orders;')
-        newData = cursor.fetchall()
+		# POST Function
+		if request.method == "POST":
 
-      print 'yo!'
-      table = request.form['projectTable']
-      print table
-      # attempted_password = request.form['password']
-    return render_template('admin/project.html',data=newData)
-  # return redirect(url_for('projects'))
+			## Update table data
+			with conn.cursor() as cursor:
+				cursor.execute('SELECT * FROM orders;')
+				newData = cursor.fetchall()
 
-  except Exception as e:
-  #flash(e)
-    return render_template('admin/project.html',data=projectData)
+			print 'yo!'
+			table = request.form['projectTable']
+			print table
+			# attempted_password = request.form['password']
+			return render_template('admin/project.html',data=newData)
+		
+		# GET Function
+		else:
+			return render_template('admin/project.html',data=projectData)
+
+	except Exception as e:
+	#flash(e)
+		return render_template('admin/project.html',data=projectData)
 
 @app.route("/customers/", methods=['POST','GET'])
 @login_required
@@ -139,9 +143,30 @@ def contact():
 
 #     return render_template('contact.html')
 
-@app.route("/review/")
+@app.route("/review/", methods=["GET","POST"])
 def reviews():
-    return render_template('reviews.html')
+	try:
+		# Post function
+		if request.method == "POST":
+			formRating = request.form['rating']
+			formOrder = request.form['orderID']
+			formMessage = request.form['Message']
+			print 'POSTED!'
+			print formOrder
+			print formMessage
+			print formRating
+
+		# ## Update table data
+		# with conn.cursor() as cursor:
+		#   cursor.execute('SELECT * FROM orders;')
+		#   newData = cursor.fetchall()
+
+		# attempted_password = request.form['password']
+		return render_template('reviews.html')
+
+	except Exception as e:
+	#flash(e)
+		return render_template('reviews.html')
 
 #close the logged_in session
 @app.route("/logout/")
