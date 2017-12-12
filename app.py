@@ -63,9 +63,28 @@ def login_required(f):
 
 #---------Password Protected pages------------
 #To password protect add the @login_required decorator under the @app.route()
-@app.route("/projects/")
+# Projects
+@app.route("/projects/", methods=["GET","POST"])
 @login_required
 def projects():
+  try:
+    #They have submitted a login
+    if request.method == "POST":
+
+      ## Update table data
+      with conn.cursor() as cursor:
+        cursor.execute('SELECT * FROM orders;')
+        newData = cursor.fetchall()
+
+      print 'yo!'
+      table = request.form['projectTable']
+      print table
+      # attempted_password = request.form['password']
+    return render_template('admin/project.html',data=newData)
+  # return redirect(url_for('projects'))
+
+  except Exception as e:
+  #flash(e)
     return render_template('admin/project.html',data=projectData)
 
 @app.route("/customers/", methods=['POST','GET'])

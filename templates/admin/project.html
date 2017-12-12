@@ -3,7 +3,8 @@
 {% block content %}
 
 <p>
-    <table border="1" cellpadding="5" cellspacing="5" id="projectTable">
+    <table border="1" cellpadding="15" cellspacing="5" name="projectTable">
+    <font size="10" face="Courier New" ><table width="42%">
         <tr>
             <td style="color:black" > Order ID</td>
             <td style="color:black" > Order Date</td>
@@ -13,12 +14,42 @@
         </tr>
         {% for row in data %}
         <tr>
-            {% for element in row%}
-                <td style="color:black">{{ element }}</td>
+            {% for i in range(0,5) %}
+                {%if i == 3 and 'Initial' in row[i]%}
+                    <td > <form method="post"> <select name="status">
+                        <option value="initail" selected>Initial</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="complete">Complete</option>
+                    </select></form></td>
+
+                {%elif i == 3 and 'Ongoing' in row[i]%}
+                    <td > <form method="post"> <select name="status">
+                        <option value="initial">Initial</option>
+                        <option value="ongoing" selected>Ongoing</option>
+                        <option value="complete">Complete</option>
+                    </select></form></td>
+
+                {%elif i == 3 and 'Complete' in row[i]%}
+                    <td > <form method="post"> <select name="status">
+                        <option value="initial">Initial</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="complete" selected>Complete</option>
+                    </select></form></td>
+
+                {%else%}
+                <td style="color:black">{{ row[i] }}</td>
+
+                {%endif%}
             {%endfor%}
         </tr>
         {%endfor%}
-    </table>
+    </table></font>
+
+    <form action = "" method = "post">
+        <input style="margin-right: 440px" type="submit" name="updateButton" value="Update" onclick="updateTables()"/>
+        <!-- <button type="button" id="updateButton" onclick="updateTables()" style="margin-right: 440px;">Update</button> -->
+    </form>
+
 </p>
 
 <style>
@@ -80,6 +111,41 @@ body {margin:0;}
         }
         }
   </style>
+
+<script>
+function updateTables() {
+  var input, filter, table, tr, td, i;
+  /*input = document.getElementById("customerLname_table_search");*/
+  filter = input.value.toUpperCase();
+  table = document.getElementById("projectTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+ 
+  }
+
+  /*for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }*/
+}
+</script>
+
+
 </body></html>
 
 {% endblock %}
