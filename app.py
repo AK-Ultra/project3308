@@ -88,6 +88,7 @@ def AddCustomerrequest():
 			query="INSERT INTO customers (firstname,lastname,emailAddress,phoneNumber,address,city) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');" % (FirstName,LastName,Email,Phone,Home,City)
 			cur.execute(query)
 			conn.commit()
+			cur.execute('SELECT MAX(customerId) FROM customers;')
 			ID = cur.fetchone()
 			ID=ID[0]
 			query="INSERT INTO orders (orderDate,description,status,customerId) VALUES (CURDATE(),'%s','Initial',%d);" % (Description,ID)
