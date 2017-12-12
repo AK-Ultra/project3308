@@ -1,124 +1,139 @@
-header          {
-
-                    margin: 0 0 0px 0;
-                    background: -webkit-linear-gradient(#000, #eee);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    -webkit-text-stroke-width: 1px;
-                    -webkit-text-stroke-color: black;
-                    font-family: 'Black Ops One';
-                    font-size: 30px;
-                    font-color: #000;
-                }
-body            {
-                      height: cover;
-                      background-color = "Azure":
-                }
-p, p2, h1, h2   { color: #000; text-align: center;}
-h1, h2          { font-family: 'Didact Gothic'; color:#000; text-align: center; margin: 0; }
-h1              { font-size: 30px; }
-h2              { font-size: 16px; }
-p2              { font-size: 10px;}
-form            {
-                text-align: top-left;
-                color: #000;
-                }
-.page           { margin: 2em auto; height: cover; border: 5px solid #ccc;
-                  padding: 0.8em; background:  #f8f8ff; }
-.metanav        { text-align: right; font-size: 0.8em; padding: 0.3em;
-                  margin-bottom: 1em; background: #fafafa; }
-.flash          { background: #cee5F5; padding: 0.5em;
-                  border: 1px solid #aacbe2; }
-.error          { background: #f0d6d6; padding: 0.5em; }
-
-#login_button{
-  color: black;
-  align: center;
-  float: right;
-  padding-right: 10px;
+body {
+  margin:0;
+  text-align:center;
+  font-family: Impact, Charcoal, sans-serif;
 }
-//nav bar
+header{
+  color:"Red";
+  text-align:center;
+}
+p{
+    color: #000;
+    font-size: 45px;
+    text-align:center;
+
+}
+p1{
+    color: #000;
+    font-size: 24px;
+    text-align:center;
+
+}
+h3{
+        color: #000;
+        font-size: 24px;
+        text-align:center;
+}
+p3{
+        color: #000;
+        font-size: 14px;
+        text-align:center;
+}
 .topnav {
-        background-color: #ffaf4d;
-        overflow: hidden;
-        }
+  background-color: #F16429;
+
+  background: -moz-linear-gradient(top, #ffffff 0%, #f16429 25%, #f16429 75%, #ffffff 99%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#f16429 25%,#f16429 75%,#ffffff 99%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ffffff 0%,#f16429 25%,#f16429 75%,#ffffff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+  overflow: hidden;
+}
 .topnav a {
-        color:#404040;
-        font-family: 'Didact Gothic';
-        float: left;
-        display: block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: underline;
-        font-size: 20px;
-        margin-left: 105;
-        }
+  color:#000;
+  font-family: Impact, Charcoal, sans-serif;
+  float: left;
+  display: block;
+  color: #605f64;
+  text-align: center;
+  padding: 14px 98px;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 105;
+  text-shadow: -0.5px 0 white, 0 0.5px #f9f9f9, 0.5px 0 white, 0 -0.5px white;
+}
 
-        /* Change the color of links on hover */
+@media screen and (max-width: 1270px) {
+  .topnav a {
+    padding: 14px 70px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .topnav a {
+    padding: 14px 45px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .topnav a {
+    padding: 14px 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .topnav a {
+    padding: 14px 14px;
+  }
+}
+
+/* Change the color of links on hover */
 .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-        }
+
+  background: -moz-linear-gradient(top, #605f64 0%, #f16429 30%, #f16429 70%, #605f64 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #605f64 0%,#f16429 30%,#f16429 70%,#605f64 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #605f64 0%,#f16429 30%,#f16429 70%,#605f64 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#605f64', endColorstr='#605f64',GradientType=0 ); /* IE6-9 */
+
+  color: black;
+}
 .topnav.icon {
-        display: none;
-        }
-        @media screen and (max-width: 600px) {
-        .topnav a:not(:first-child) {display: none;}
-        .topnav a.icon {
-        float: right;
-        display: block;
-        }
-        }
-        @media screen and (max-width: 600px) {
-        .topnav.responsive {position: relative;}
-        .topnav.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-        }
-        .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-        }
-//ratings styles
-.checked {
-    color: orange;
+  display: none;
 }
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-fieldset, label { margin: 0; padding: 0; }
-.rating {
-  border: none;
-  display:flex;
-  flex-direction:row-reverse;
-  justify-content:center;
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 
-.rating > input { display: none; }
-.rating > label:before {
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
+img {
+  display: block;
+  margin: auto;
 }
 
-.rating > .half:before {
-  content: "\f089";
-  position: absolute;
+.homeImgDiv {
+  border-radius: 15px;
+  overflow: hidden;
+  width: 750px;
+  height: 350px;
+  margin: auto;
 }
 
-.rating > label {
-  color: #ddd;
- float: right;
+.login_button {
+  color: #F16429;
+  position:absolute;
+  top:0;
+  right:0;
+  margin: 15px;
+  text-decoration: none;
 }
-.rating > input:checked ~ label, /* show gold star when clicked */
-.rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
 
-.rating > input:checked + label:hover, /* hover current star when changing rating */
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
 
