@@ -31,9 +31,9 @@ with conn.cursor() as cursor:
 	# Query customers
 	cursor.execute('SELECT * FROM customers;')
 	customerData = cursor.fetchall()
-	
-app.static_folder = 'static'
 
+app.static_folder = 'static'
+#Possably move the query tables in to there functions for dynamic data
 @app.route("/")
 def main():
     return render_template('index.html',data=reviewData)
@@ -56,7 +56,7 @@ def login_required(f):
 #def loginCheck():
 #    if 'logged_in' in session:
 #        return True
-#    else: 
+#    else:
 #        return False
 
 #---------Password Protected pages------------
@@ -71,22 +71,25 @@ def projects():
 def customers():
     return render_template('admin/customers.html',data=customerData)
 
-@app.route("/AddCustomerrequest", methods=['POST','GET'])
+@app.route("/AddCustomerrequest/", methods=['POST','GET'])
 @login_required
 def AddCustomerrequest():
 			FirstName=request.form['FirstName']
 			LastName=request.form['LastName']
 			Email=request.form['Email']
 			Phone=request.form['Phone']
-			Home=request.form['Home']
+			Home=request.form['Address']
 			City=request.form['City']
 			cur = conn.cursor()
-			query="INSERT INTO customers VALUES (2002,'%s', '%s', '%s', '%s', '%s', '%s');" % (FirstName,LastName,Email,Phone,Home,City)
+			#needs to dynamicly pick Numbers
+			query="INSERT INTO customers VALUES (175413,'%s', '%s', '%s', '%s', '%s', '%s');" % (FirstName,LastName,Email,Phone,Home,City)
 			cur.execute(query)
 			conn.commit()
-			return 'Done'
+			flash("Customer Added.")
+			return redirect(url_for('customers'))
 
-@app.route("/AddCustomer", methods=['POST','GET'])
+@app.route("/AddCustomer/", methods=['POST','GET'])
+@login_required
 def AddCustomer():
     	return render_template('admin/AddCustomer.html')
 

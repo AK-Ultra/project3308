@@ -1,14 +1,14 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
-	{%if session['logged_in']%}		       
+	{%if session['logged_in']%}
 	<a class="login_button" href="/logout/">Log-out</a>
 	{%else%}
-       	<a class="login_button" href="/login">Login</a>  
+       	<a class="login_button" href="/login">Login</a>
   	{%endif%}
 	<a href="/">
 		<img class="main_img" src="{{url_for('static', filename='logo.jpg')}}" style="width:452px;height:199px;" />
@@ -22,6 +22,7 @@
       {% if session['logged_in'] %}
       <a href="/projects">Projects</a>
       <a href="/customers">Customers</a>
+			<a href="/AddCustomer">AddCustomer</a>
       {%endif%}
   </div>
   <br>
