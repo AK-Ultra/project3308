@@ -9,8 +9,11 @@
 </style>
 <!-- Add icon library -->
 <h1>Please Leave Us a Review</h1>
-<fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+<form action = "" method = "post">
+
+  <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value = "{{request.form.star5}}" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
     <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
     <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
     <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
@@ -20,22 +23,17 @@
     <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
     <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
     <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-</fieldset>
+  </fieldset>
 
-<form action="man.php">
-    Order ID:<br>
-    <input name="orderID" placeholder="Order ID" type="text" maxlength="7">
+  <br>Order ID:<br>
+  <input name="orderID" maxlength="7" type="text" placeholder = "Order ID" value = "{{request.form.orderID}}">
+  
+  <br>Review:<br>
+  <textarea name="Message" placeholder="How was your experience" rows="5" cols="50" wrap="soft" maxlength="140" value = "{{request.form.Message}}" style="overflow:hidden; resize:none"></textarea>
 
-    <br>
-    Review:<br>
-    <!-- <input name="Message" value="How was your experience?" type="text" style="height: 150px";> -->
-    <textarea name="Message" placeholder="How was your experience" rows="5" cols="50" wrap="soft" maxlength="140" style="overflow:hidden; resize:none"></textarea>
-    <br><br>
-    <!-- <input value="Submit" type="submit"> -->
-</form>
+  <br><br>
+  <input type="submit" name="submitButton" value="Submit"/>
 
-<form action = "" method = "post">
-    <input type="submit" name="submitButton" value="Submit"/>
 </form>
 
 
