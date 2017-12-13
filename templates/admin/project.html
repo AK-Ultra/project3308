@@ -4,8 +4,7 @@
 
 <form action = "" method = "post" enctype="multipart/form-data">
 
-  <table border="1" cellpadding="15" cellspacing="5" name="projectTable">
-  <font size="10" face="Courier New" ><table width="42%">
+  <table border="1" cellpadding="15" align="center" cellspacing="5" name="projectTable">
       <tr>
           <td style="color:black" > Order ID</td>
           <td style="color:black" > Order Date</td>
@@ -44,8 +43,11 @@
           {%endfor%}
       </tr>
       {%endfor%}
-  </table></font>
-  <input style="margin-right: 440px" type="submit" name="updateButton" value="Update"/>
+  </table>
+  <br>
+  <font size="5">
+  <input style="width:150px;height:100px;" type="submit" name="updateButton" value="Update" align="center"/>
+  </font>
 
 </form>
 
