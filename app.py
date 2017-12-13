@@ -69,7 +69,7 @@ def projects():
 
 		# POST Function
 		if request.method == "POST":
-			
+
 			# generate old status list
 			oldStatus = []
 			for row in projectData:
@@ -88,16 +88,16 @@ def projects():
 				if (oldStatus[i][0] != newStatus[i]):
 					status = newStatus[i]
 					order = oldStatus[i][1]
-					print 'Updating:',order,'to status:',status
+					print ('Updating:',order,'to status:',status)
 
-					# update status via query 
+					# update status via query
 					try:
 						with conn.cursor() as cursor:
 							cursor.execute("UPDATE orders SET status = '{}' WHERE orderID = {};".format(status,order))
 							conn.commit()
-						print 'Commited'
+						print ('Commited')
 					except Exception as e:
-						print 'An error occured during UPDATE',e
+						print ('An error occured during UPDATE',e)
 
 			flash('Order status has been updated!')
 			return redirect(url_for('projects'))
@@ -161,7 +161,7 @@ def sendemail():
 	Email=request.form['email']
 	PDesciption=request.form['Message']
 	sbj="Request from: %s" % Fname
-	msg=Message(sbj,sender='oscardel413@gmail.com', recipients=['osde9756@colorado.edu'])
+	msg=Message(sbj,sender='oscardel413@gmail.com', recipients=['Tanner.quigley@colorado.edu'])
 	body="%s\nContact: %s\nDesires: %s" % (Fname,Email,PDesciption)
 	msg.body=body
 	mail.send(msg)
