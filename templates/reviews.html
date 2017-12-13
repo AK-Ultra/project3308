@@ -9,35 +9,40 @@
 </style>
 <!-- Add icon library -->
 <h1>Please Leave Us a Review</h1>
-<fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+
+<form action = "" method = "post">
+
+  <fieldset class="rating">
+
+    <input type="radio" id="star5" name="rating" value="{{request.form.star5}}" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
     <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+
     <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+
     <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+
     <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-</fieldset>
 
-<form action="man.php">
-    Order ID:<br>
-    <input name="orderID" value="Please enter your Order ID" type="text" >
+  </fieldset>
 
-    <br>
-    Review:<br>
-    <input name="Message" value="How was your experience?" type="text" style="height: 150px";>
-    <br><br>
-    <input value="Submit" type="submit">
+  <br>Order ID:<br>
+  <input name="orderID" maxlength="7" type="text" placeholder = "Order ID" value = "{{request.form.orderID}}">
+  
+  <br>Review:<br>
+  <textarea name="Message" placeholder="How was your experience" rows="5" cols="50" wrap="soft" maxlength="140" value = "{{request.form.Message}}" style="overflow:hidden; resize:none"></textarea>
+
+  <br><br>
+  <input type="submit" name="submitButton" value="Submit"/>
+
 </form>
+
+
 <p2>Please note: Your rating may be posted on the website for public viewing.</p2>
 <style>
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
 h1 {
     font-size: 22px;
     text-align: center;
@@ -56,7 +61,7 @@ form {
 
 .rating {
   border: none;
-  display:flex;
+  display: inline;
   flex-direction:row-reverse;
   justify-content:center;
 }
@@ -88,65 +93,8 @@ form {
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
-body {margin:0;}
- 	header{
-  	color:"Red";
-    text-align:center;
-    }
-     body{
-       color:#FFFFF0;
-       text-align:center;
-     }
-     p{
-      font-size: 35px;
-      font-weight: bold;
-     }
-     .topnav {
-        background-color: #333;
-        overflow: hidden;
-        }
-        .topnav a {
-        color:#000;
-        font-family: 'Didact Gothic';
-        float: left;
-        display: block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: underline;
-        font-size: 20px;
-        margin-left: 105;
-        }
 
-        /* Change the color of links on hover */
-        .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-        }
-        .topnav.icon {
-        display: none;
-        }
-        @media screen and (max-width: 600px) {
-        .topnav a:not(:first-child) {display: none;}
-        .topnav a.icon {
-        float: right;
-        display: block;
-        }
-        }
-        @media screen and (max-width: 600px) {
-        .topnav.responsive {position: relative;}
-        .topnav.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-        }
-        .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-        }
-        }
-  </style>
+</style>
 </body></html>
 
 {% endblock %}

@@ -1,18 +1,35 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/style.css') }}"/>
+</head>
+<body bgcolor="Azure">
+<a id="login_button" href="login">Login</a>
+<div id="wrapperHeader">
+    <div id="header">
+        <img src="logo.jpg" alt="Del Concrete" />
+    </div>
+</div>
+<div class="topnav" id="myTopnav">
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/customers">Customer Info</a>
+    <a href="/AddCustomer">Add Customer</a>
+</div>
+<br>
+<!--<img src="index_files/url_forstatic%2520filename home.jpg%27%29%257D%257D" style="width:750px;height:350px;">-->
 
-{% block content %}
 
-<p>
-    <table border="1" cellpadding="5" cellspacing="5">
-        {% for row in data %}
-        <tr>
-            {% for element in row%}
-                <td style="color:black">{{ element }}</td>
-            {%endfor%}
-        </tr>
-        {%endfor%}
-    </table>
-</p>
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
 
 <style>
 body {margin:0;}
@@ -23,9 +40,6 @@ body {margin:0;}
      body{
        color:#FFFFF0;
        text-align:center;
-     }
-     p{
-      font-size: 25px;
      }
      .topnav {
         background-color: #333;
@@ -74,5 +88,5 @@ body {margin:0;}
         }
   </style>
 </body></html>
-
+{% block content %}
 {% endblock %}

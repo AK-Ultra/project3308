@@ -7,28 +7,7 @@ header{
   color:"Red";
   text-align:center;
 }
-p{
-    color: #000;
-    font-size: 45px;
-    text-align:center;
 
-}
-p1{
-    color: #000;
-    font-size: 24px;
-    text-align:center;
-
-}
-h3{
-        color: #000;
-        font-size: 24px;
-        text-align:center;
-}
-p3{
-        color: #000;
-        font-size: 14px;
-        text-align:center;
-}
 .topnav {
   background-color: #F16429;
 
@@ -132,8 +111,3 @@ img {
   margin: 15px;
   text-decoration: none;
 }
-
-.carousel-inner > .item > img {
-    margin: 0 auto;
-}
-
