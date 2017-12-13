@@ -148,14 +148,21 @@ def reviews():
 	try:
 		# POST Function
 		if request.method == "POST":
-				formRating = request.form['rating']
-				formOrder = request.form['orderID']
-				formMessage = request.form['Message']
-				print 'POSTED!'
-				print formOrder
-				print formMessage
-				print formRating
-				return redirect(url_for('reviews'))
+			
+			print 'POSTED!'
+			
+			formOrder = request.form['orderID']
+			formMessage = request.form['Message']
+			# if (request.form['star5']):
+			# 	formRating = 5
+			
+			print 'POSTED!'
+
+			print formOrder
+			print formMessage
+			# print formRating
+
+			return redirect(url_for('reviews'))
 		
 		# GET Function
 		else:
