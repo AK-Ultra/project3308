@@ -66,12 +66,12 @@ def projects():
 			# 	cursor.execute('SELECT * FROM orders;')
 			# 	newData = cursor.fetchall()
 
-			print 'yo!'
+			print ('yo!')
 			table = request.form['projectTable']
-			print table
+			print (table)
 			# attempted_password = request.form['password']
 			return redirect(url_for('projects'))
-		
+
 		# GET Function
 		else:
 			return render_template('admin/project.html',data=projectData)
@@ -135,7 +135,7 @@ def reviews():
 	try:
 		# POST Function
 		if request.method == "POST":
-			
+
 			try:
 				formRating = request.form['rating']
 			except:
@@ -144,7 +144,7 @@ def reviews():
 			formOrder = request.form['orderID']
 			formMessage = request.form['Message']
 
-			print formRating
+			print (formRating)
 
 			# orderID check
 			with conn.cursor() as cursor:
@@ -160,7 +160,7 @@ def reviews():
 					conn.commit()
 
 				flash('Thank you! Your review has been posted!')
-			
+
 			# Check fails
 			else:
 				flash('Unable to post review: Invalid Order ID or review already exists.')

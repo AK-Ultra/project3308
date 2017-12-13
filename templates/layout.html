@@ -23,9 +23,14 @@
       <a href="/review">Review</a>
 			<!-- If logged in display extended admin nav bar -->
       {% if session['logged_in'] %}
+      <style>
+        .topnav a {
+          padding: 14px 19px;
+        }
+      </style>
       <a href="/projects">Projects</a>
       <a href="/customers">Customers</a>
-      <a href="/AddCustomer">AddCustomer</a>
+      <a href="/AddCustomer">Add Customer</a>
       {%endif%}
   </div>
   <br>
