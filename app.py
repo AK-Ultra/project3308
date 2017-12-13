@@ -15,26 +15,18 @@ app.secret_key = 'password'
 ## Database Connection
 conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
 
-## Query tables
-
-with conn.cursor() as cursor:
-
-	# Query reviews
-	cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
-	reviewData = cursor.fetchall()
-
-with conn.cursor() as cursor:
-
-	# Query customers
-	cursor.execute('SELECT * FROM customers;')
-	customerData = cursor.fetchall()
-
 app.static_folder = 'static'
-#Possably move the query tables in to there functions for dynamic data
+
+# home
 @app.route("/")
 def main():
-    return render_template('index.html',data=reviewData)
+	# Query reviews
+	with conn.cursor() as cursor:
+		cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
+		reviewData = cursor.fetchall()
+	return render_template('index.html',data=reviewData)
 
+# services
 @app.route("/services/")
 def services():
     return render_template('services.html')
@@ -50,14 +42,11 @@ def login_required(f):
                  return redirect(url_for('login'))
         return wrap
 
-#def loginCheck():
-#    if 'logged_in' in session:
-#        return True
-#    else:
-#        return False
 
 #---------Password Protected pages------------
 #To password protect add the @login_required decorator under the @app.route()
+
+
 # Projects
 @app.route("/projects/", methods=["GET","POST"])
 @login_required
@@ -90,11 +79,17 @@ def projects():
 	#flash(e)
 		return render_template('admin/project.html',data=projectData)
 
+# customers
 @app.route("/customers/", methods=['POST','GET'])
 @login_required
 def customers():
-    return render_template('admin/customers.html',data=customerData)
+	# Query customers
+	with conn.cursor() as cursor:
+		cursor.execute('SELECT * FROM customers;')
+		customerData = cursor.fetchall()
+	return render_template('admin/customers.html',data=customerData)
 
+# add customer
 @app.route("/AddCustomerrequest/", methods=['POST','GET'])
 @login_required
 def AddCustomerrequest():
@@ -134,54 +129,45 @@ def info():
 def contact():
     return render_template('contact.html')
 
-# @app.route("/contact/", methods=["POST"])
-# def submitContact():
-#     _firstname = request.form['firstname']
-#     _lastname = request.form['lastname']
-#     _message = request.form['Message']
-
-#     return render_template('contact.html')
-
 @app.route("/review/", methods=["GET","POST"])
 def reviews():
 	try:
 		# POST Function
 		if request.method == "POST":
 			
-			print 'POSTED!'
-			
+			try:
+				formRating = request.form['rating']
+			except:
+				formRating = 5
+
 			formOrder = request.form['orderID']
 			formMessage = request.form['Message']
-			# if (request.form['star5']):
-			#  	formRating = 5
 
-			# flash(formOrder)
-			# flash(formMessage)
-			# flash(formRating)
-			
-			print 'POSTED!'
+			print formRating
 
-			print formOrder
-			print formMessage
-			# print formRating
-
+			# orderID check
 			with conn.cursor() as cursor:
-				# Check if orderID exists and review doesn't exist
 				cursor.execute("SELECT count(*) FROM orders WHERE orderID = '{}' AND orderID NOT IN (SELECT orderID FROM reviews);".format(formOrder))
 				orderCheck = cursor.fetchone()[0]
 
+			# Check passes
 			if (orderCheck == 1):
 
+				# Insert review
 				with conn.cursor() as cursor:
-					cursor.execute("INSERT INTO reviews VALUES (0,'{}','{}',5);".format(formOrder,formMessage))
+					cursor.execute("INSERT INTO reviews VALUES (0,'{}','{}',{});".format(formOrder,formMessage,formRating))
 					conn.commit()
 
-				flash('Review has been posted!')
-
+				flash('Thank you! Your review has been posted!')
+			
+			# Check fails
 			else:
-				flash('Unable to post review: Invalid Order ID or a review has already been posted.')
+				flash('Unable to post review: Invalid Order ID or review already exists.')
 
-		return render_template('reviews.html')
+			redirect(url_for('review'))
+
+		else:
+			return render_template('reviews.html')
 
 	except Exception as e:
 		return render_template('reviews.html')
@@ -208,16 +194,13 @@ def login():
         cursor.execute("SELECT count(*) from users WHERE BINARY username = '{}' and password = '{}';".format(attempted_username,attempted_password))
         auth = cursor.fetchone()[0]
 
-     # flash(auth)
-     # flash(attempted_username)
-     # flash(attempted_password)
-      #if authorized redirect to projects dashboard
       if auth > 0:
           session['logged_in'] = True
           session['username'] = request.form['username']
 
           # admin redirect
           return redirect(url_for('projects'))
+
       #Not valid credentials
       else:
           flash("Invalid Credentials")
