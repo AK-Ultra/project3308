@@ -91,7 +91,7 @@ def projects():
 						print 'An error occured during UPDATE',e
 
 			return redirect(url_for('projects'))
-		
+
 		# GET Function
 		else:
 			return render_template('admin/project.html',data=projectData)
@@ -154,7 +154,7 @@ def reviews():
 	try:
 		# POST Function
 		if request.method == "POST":
-			
+
 			try:
 				formRating = request.form['rating']
 			except:
@@ -163,7 +163,7 @@ def reviews():
 			formOrder = request.form['orderID']
 			formMessage = request.form['Message']
 
-			print formRating
+			print (formRating)
 
 			# orderID check
 			with conn.cursor() as cursor:
@@ -179,7 +179,7 @@ def reviews():
 					conn.commit()
 
 				flash('Thank you! Your review has been posted!')
-			
+
 			# Check fails
 			else:
 				flash('Unable to post review: Invalid Order ID or review already exists.')
