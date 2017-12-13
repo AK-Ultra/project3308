@@ -24,6 +24,7 @@ def main():
 	with conn.cursor() as cursor:
 		cursor.execute('SELECT t1.description, t3.firstName, LEFT(t3.lastName,1), t1.starCount FROM reviews t1 INNER JOIN orders t2 ON t1.orderID = t2.orderID INNER JOIN customers t3 ON t2.customerID = t3.customerID ORDER BY t1.starCount DESC LIMIT 4;')
 		reviewData = cursor.fetchall()
+
 	return render_template('index.html',data=reviewData)
 
 # services

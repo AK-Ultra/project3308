@@ -24,24 +24,32 @@
             <div class="item active">
                 <img src="{{url_for('static', filename='home.jpg')}}" align = "center" alt="1">
                 <div class="carousel-caption">
-                    <h3>Review</h3>
-                    <p3>Name</p3>
+                    <h3>{{data[0][0]}}</h3>
+                    <p3>-{{data[0][1]}} {{data[0][2]}}</p3>
                 </div>
             </div>
 
             <div class="item">
                 <img src="{{url_for('static', filename='4.JPG')}}" align = "center" alt="1">
                 <div class="carousel-caption">
-                    <h3>Review</h3>
-                    <p3>Name</p3>
+                    <h3>{{data[1][0]}}</h3>
+                    <p3>-{{data[1][1]}} {{data[1][2]}}</p3>
                 </div>
             </div>
 
             <div class="item">
                 <img src="{{url_for('static', filename='5.JPG')}}" align = "center" alt="1">
                 <div class="carousel-caption">
-                    <h3>Review</h3>
-                    <p3>Name</p3>
+                    <h3>{{data[2][0]}}</h3>
+                    <p3>-{{data[2][1]}} {{data[2][2]}}</p3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="{{url_for('static', filename='3.JPG')}}" align = "center" alt="1">
+                <div class="carousel-caption">
+                    <h3>{{data[3][0]}}</h3>
+                    <p3>-{{data[3][1]}} {{data[3][2]}}</p3>
                 </div>
             </div>
 
