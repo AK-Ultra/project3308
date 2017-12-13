@@ -17,7 +17,6 @@ conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
 
 ## Query tables
 
-
 with conn.cursor() as cursor:
 
 	# Query reviews
@@ -154,7 +153,11 @@ def reviews():
 			formOrder = request.form['orderID']
 			formMessage = request.form['Message']
 			# if (request.form['star5']):
-			# 	formRating = 5
+			#  	formRating = 5
+
+			# flash(formOrder)
+			# flash(formMessage)
+			# flash(formRating)
 			
 			print 'POSTED!'
 
@@ -162,11 +165,23 @@ def reviews():
 			print formMessage
 			# print formRating
 
-			return redirect(url_for('reviews'))
-		
-		# GET Function
-		else:
-			return render_template('reviews.html')
+			with conn.cursor() as cursor:
+				# Check if orderID exists and review doesn't exist
+				cursor.execute("SELECT count(*) FROM orders WHERE orderID = '{}' AND orderID NOT IN (SELECT orderID FROM reviews);".format(formOrder))
+				orderCheck = cursor.fetchone()[0]
+
+			if (orderCheck == 1):
+
+				with conn.cursor() as cursor:
+					cursor.execute("INSERT INTO reviews VALUES (0,'{}','{}',5);".format(formOrder,formMessage))
+					conn.commit()
+
+				flash('Review has been posted!')
+
+			else:
+				flash('Unable to post review: Invalid Order ID or a review has already been posted.')
+
+		return render_template('reviews.html')
 
 	except Exception as e:
 		return render_template('reviews.html')
