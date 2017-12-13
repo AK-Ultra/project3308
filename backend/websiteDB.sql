@@ -25,7 +25,8 @@ INSERT INTO customers VALUES
 (72391,'Alex','Delgado','alexdel413@gmail.com','720-242-7210','11355 livingston dr','Northglenn'),
 (72324,'Hector','Marin','HectorMar425@gmail.com','303-808-3003','1203 love st','Littleton'),
 (72384,'Allen','Reyes','Allen424@gmail.com','720-242-6126','820 28th st','Boulder'),
-(0,'Test','User','Test@gmail.com','555-555-5555','test address','Boulder');
+(0,'Test','User','Test@gmail.com','555-555-5555','test address','Boulder'),
+(0,'Hell','Boy','Test@gmail.com','666-666-6666','Schlecht Strasse','Hell');
 
 /*Table structure for table orders */
 
@@ -48,7 +49,8 @@ INSERT INTO orders VALUES
 (1151423,'2017-04-13','Sidewalk Replacement','Complete',72391),
 (1234123,'2017-08-20','Cement Patio','Initial',72324),
 (5657475,'2017-10-20','Driveway Replacement','Ongoing',72384),
-(0,CURDATE(),'Test Description','Initial',72392);
+(0,CURDATE(),'Test Description','Initial',72392),
+(1111111,CURDATE(),'Concrete Stuff','Ongoing',72393);
 
 /*Table structure for table users */
 
@@ -84,4 +86,7 @@ CREATE TABLE reviews (
 /*Data for the table orders */
 
 INSERT INTO reviews VALUES
-(0,1151423,'Nice website, keep up the good work!',5);
+(0,1151423,'Nice website, keep up the good work!',5),
+(0,1234123,'A+ service, would recommend!',5),
+(0,5657475,'PHAT Patio!',5),
+(0,5657476,'Good Work',4);
