@@ -4,21 +4,29 @@
 
 <body>
 	    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"></strong> -->
-		  
-	<div class="container">
+
+	<div id="parent"align="center" class="container">
 		<br>
 		<h4><i style="color:black"> Please Login:</i></h4>
 		<br>
 		<!--Post username and password to python code -->
-		<form action ="" class= "form-inline"  method ="post">	
+		<form id="form"action ="" class= "form-inline"  method ="post">
 			<input type="text" class="form-control" placeholder = "Username" name="username"
 		       		value = "{{request.form.username}}">
-                	<input type="password" class="form-control" placeholder = "Password" name="password" 
+                	<input type="password" class="form-control" placeholder = "Password" name="password"
 				value="{{request.form.password}}">
-			<!--The login button-->	
+			<!--The login button-->
 		<input class="btn btn-default" type="submit" value="Login">
 		</form>
 		<i style="color:red">{{error}}</i>
 	</div>
-</body>	
+</body>
+
+<style>
+#form {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+}
+</style>
 {% endblock %}

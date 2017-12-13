@@ -3,7 +3,8 @@
 {% block content %}
 
 <p>
-    <table border="1" cellpadding="15" cellspacing="5" name="projectTable">
+  <div id="parent"align="center" class="container">
+    <table id="table" border="2" cellpadding="15" cellspacing="5" name="projectTable">
     <font size="10" face="Courier New" ><table width="42%">
         <tr>
             <td style="color:black" > Order ID</td>
@@ -43,8 +44,7 @@
             {%endfor%}
         </tr>
         {%endfor%}
-    </table></font>
-
+    </table></font> </div>
     <form action = "" method = "post">
         <input style="margin-right: 440px" type="submit" name="updateButton" value="Update" onclick="updateTables()"/>
         <!-- <button type="button" id="updateButton" onclick="updateTables()" style="margin-right: 440px;">Update</button> -->
@@ -53,6 +53,9 @@
 </p>
 
 <style>
+#parent {
+   vertical-align: middle;
+}
 body {margin:0;}
  	header{
   	color:"Red";
@@ -129,7 +132,7 @@ function updateTables() {
       } else {
         tr[i].style.display = "none";
       }
- 
+
   }
 
   /*for (i = 0; i < tr.length; i++) {
