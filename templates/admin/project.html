@@ -2,55 +2,54 @@
 
 {% block content %}
 
-<p>
-    <table border="1" cellpadding="15" cellspacing="5" name="projectTable">
-    <font size="10" face="Courier New" ><table width="42%">
-        <tr>
-            <td style="color:black" > Order ID</td>
-            <td style="color:black" > Order Date</td>
-            <td style="color:black" > Description</td>
-            <td style="color:black" > Status</td>
-            <td style="color:black" > Customer ID</td>
-        </tr>
-        {% for row in data %}
-        <tr>
-            {% for i in range(0,5) %}
-                {%if i == 3 and 'Initial' in row[i]%}
-                    <td > <form method="post"> <select name="status">
-                        <option value="initail" selected>Initial</option>
-                        <option value="ongoing">Ongoing</option>
-                        <option value="complete">Complete</option>
-                    </select></form></td>
 
-                {%elif i == 3 and 'Ongoing' in row[i]%}
-                    <td > <form method="post"> <select name="status">
-                        <option value="initial">Initial</option>
-                        <option value="ongoing" selected>Ongoing</option>
-                        <option value="complete">Complete</option>
-                    </select></form></td>
+<form action = "" method = "post" enctype="multipart/form-data">
 
-                {%elif i == 3 and 'Complete' in row[i]%}
-                    <td > <form method="post"> <select name="status">
-                        <option value="initial">Initial</option>
-                        <option value="ongoing">Ongoing</option>
-                        <option value="complete" selected>Complete</option>
-                    </select></form></td>
+  <table border="1" cellpadding="15" cellspacing="5" name="projectTable">
+  <font size="10" face="Courier New" ><table width="42%">
+      <tr>
+          <td style="color:black" > Order ID</td>
+          <td style="color:black" > Order Date</td>
+          <td style="color:black" > Description</td>
+          <td style="color:black" > Status</td>
+          <td style="color:black" > Customer ID</td>
+      </tr>
+      {% for row in data %}
+      <tr>
+          {% for i in range(0,5) %}
+              {%if i == 3 and 'Initial' in row[i]%}
+                  <td > <select name="status">
+                      <option value="Initial" selected>Initial</option>
+                      <option value="Ongoing">Ongoing</option>
+                      <option value="Complete">Complete</option>
+                  </select></td>
 
-                {%else%}
-                <td style="color:black">{{ row[i] }}</td>
+              {%elif i == 3 and 'Ongoing' in row[i]%}
+                  <td > <select name="status">
+                      <option value="Initial">Initial</option>
+                      <option value="Ongoing" selected>Ongoing</option>
+                      <option value="Complete">Complete</option>
+                  </select></td>
 
-                {%endif%}
-            {%endfor%}
-        </tr>
-        {%endfor%}
-    </table></font>
+              {%elif i == 3 and 'Complete' in row[i]%}
+                  <td > <select name="status">
+                      <option value="Initial">Initial</option>
+                      <option value="Ongoing">Ongoing</option>
+                      <option value="Complete" selected>Complete</option>
+                  </select></td>
 
-    <form action = "" method = "post">
-        <input style="margin-right: 440px" type="submit" name="updateButton" value="Update" onclick="updateTables()"/>
-        <!-- <button type="button" id="updateButton" onclick="updateTables()" style="margin-right: 440px;">Update</button> -->
-    </form>
+              {%else%}
+              <td style="color:black">{{ row[i] }}</td>
 
-</p>
+              {%endif%}
+          {%endfor%}
+      </tr>
+      {%endfor%}
+  </table></font>
+  <input style="margin-right: 440px" type="submit" name="updateButton" value="Update"/>
+
+</form>
+
 
 <style>
 body {margin:0;}
@@ -120,7 +119,7 @@ function updateTables() {
   table = document.getElementById("projectTable");
   tr = table.getElementsByTagName("tr");
 
-  for (i = 0; i < tr.length; i++) {
+/*  for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[2];
 
     if (td) {
@@ -130,7 +129,7 @@ function updateTables() {
         tr[i].style.display = "none";
       }
  
-  }
+  }*/
 
   /*for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[2];
