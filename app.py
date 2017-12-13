@@ -4,6 +4,7 @@ from flask import Flask, render_template, flash, request, url_for , redirect, se
 import pymysql.cursors
 #For creating python decorators
 from functools import wraps
+from flask_mail import Message, Mail
 
 #from flask_mail import Mail
 
@@ -14,6 +15,14 @@ app.secret_key = 'password'
 
 ## Database Connection
 conn = pymysql.connect(host='localhost',user='root',passwd='123',db='websiteDB')
+
+#email server
+app.config['MAIL_SERVER']= 'smtp.gmail.com'
+app.config['MAIL_PORT']= 465
+app.config['MAIL_USE_SSL']= True
+app.config['MAIL_USERNAME'] = 'oscardel413@gmail.com'
+app.config['MAIL_PASSWORD'] = 'wkub kggk xpiw mcjx'
+mail = Mail(app)
 
 app.static_folder = 'static'
 
@@ -146,7 +155,20 @@ def AddCustomer():
 def info():
     return render_template('aboutUs.html')
 
-@app.route("/contact/")
+@app.route("/sendemail/", methods=('POST', 'GET'))
+def sendemail():
+	Fname=request.form['firstname']
+	Email=request.form['email']
+	PDesciption=request.form['Message']
+	sbj="Request from: %s" % Fname
+	msg=Message(sbj,sender='oscardel413@gmail.com', recipients=['osde9756@colorado.edu'])
+	body="%s\nContact: %s\nDesires: %s" % (Fname,Email,PDesciption)
+	msg.body=body
+	mail.send(msg)
+	flash("Request Sent")
+	return render_template('contact.html')
+
+@app.route("/contact/", methods=['POST','GET'])
 def contact():
     return render_template('contact.html')
 
