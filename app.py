@@ -90,6 +90,7 @@ def projects():
 					except Exception as e:
 						print 'An error occured during UPDATE',e
 
+			flash('Order status has been updated!')
 			return redirect(url_for('projects'))
 
 		# GET Function
