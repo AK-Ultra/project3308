@@ -60,16 +60,36 @@ def projects():
 
 		# POST Function
 		if request.method == "POST":
+			
+			# generate old status list
+			oldStatus = []
+			for row in projectData:
+				oldStatus.append((row[3],row[0]))
 
-			## Update table data
-			# with conn.cursor() as cursor:
-			# 	cursor.execute('SELECT * FROM orders;')
-			# 	newData = cursor.fetchall()
+			# generate updated status list
+			updatedTable = request.form.getlist('status')
+			newStatus = []
+			for string in updatedTable:
+				newStatus.append(str(string))
 
-			print ('yo!')
-			table = request.form['projectTable']
-			print (table)
-			# attempted_password = request.form['password']
+			# update DB
+			order = 0
+			status = ''
+			for i in range(0,len(oldStatus)):
+				if (oldStatus[i][0] != newStatus[i]):
+					status = newStatus[i]
+					order = oldStatus[i][1]
+					print 'Updating:',order,'to status:',status
+
+					# update status via query 
+					try:
+						with conn.cursor() as cursor:
+							cursor.execute("UPDATE orders SET status = '{}' WHERE orderID = {};".format(status,order))
+							conn.commit()
+						print 'Commited'
+					except Exception as e:
+						print 'An error occured during UPDATE',e
+
 			return redirect(url_for('projects'))
 
 		# GET Function
@@ -77,7 +97,6 @@ def projects():
 			return render_template('admin/project.html',data=projectData)
 
 	except Exception as e:
-	#flash(e)
 		return render_template('admin/project.html',data=projectData)
 
 # customers
